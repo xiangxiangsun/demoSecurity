@@ -40,9 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
 
                 //这就表示/whoim的这个资源需要有ROLE_ADMIN的这个角色才能访问。不然就会提示拒绝访问
-                .antMatchers("/whoim").hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST,"/user/").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET,"/user/").hasRole("USER")
+//                .antMatchers("/whoim").hasRole("ADMIN")
+//                .antMatchers(HttpMethod.POST,"/user/").hasRole("ADMIN")
+//                .antMatchers(HttpMethod.GET,"/user/").hasRole("USER")
                 //必须经过验证才能访问
                 .anyRequest().access("@rbacService.hasPermission(request,authentication)")
 
