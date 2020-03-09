@@ -34,4 +34,19 @@ public class LoginController {
     {
         return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
+
+    @RequestMapping("/work")
+    public String work(){
+        return "work";
+    }
+
+    @RequestMapping("/setting")
+    public String setting(){
+        return "setting";
+    }
+
+    @RequestMapping("/select")
+    public String select(){
+        return "select";
+    }
 }
