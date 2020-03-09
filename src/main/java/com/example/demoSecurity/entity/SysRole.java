@@ -1,5 +1,6 @@
 package com.example.demoSecurity.entity;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,13 +9,13 @@ import java.util.Set;
  * @data: 2020-03-06
  */
 public class SysRole {
-    private Long id;
+    private Integer id;
     private String name;
     private String keyword; // 角色关键字，用于权限控制
     private String description; // 描述
     private Set<SysUser> users = new HashSet<SysUser>(0);
 
-    public SysRole(Long id, String name, String keyword, String description, Set<SysUser> users) {
+    public SysRole(Integer id, String name, String keyword, String description, Set<SysUser> users) {
         this.id = id;
         this.name = name;
         this.keyword = keyword;
@@ -22,16 +23,16 @@ public class SysRole {
         this.users = users;
     }
 
-    public SysRole(Long id, String name) {
+    public SysRole(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

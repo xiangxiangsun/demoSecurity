@@ -2,6 +2,7 @@ package com.example.demoSecurity.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,20 +30,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 //放行登陆所需资源
-                .antMatchers("/css/*.css").permitAll()
+//                .antMatchers("/css/*.css").permitAll()
 
                 //这就表示 /index这个页面不需要权限认证，所有人都可以访问
-//                .antMatchers("/index").permitAll()
+//                .antMatchers("/whoim").permitAll()
 
                 .and()
                 //对请求进行授权
                 .authorizeRequests()
 
                 //这就表示/whoim的这个资源需要有ROLE_ADMIN的这个角色才能访问。不然就会提示拒绝访问
-//                .antMatchers("/whoim").hasRole("ADMIN")
+                .antMatchers("/whoim").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST,"/user/").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET,"/user/").hasRole("USER")
+                //必须经过验证才能访问
+                .anyRequest().access("@rbacService.hasPermission(request,authentication)")
 
                 //任何请求链接的访问均需验证权限，即：必须经过认证以后才能访问
-                .anyRequest().authenticated()
+//                .anyRequest().authenticated()
 
                 .and()
                 //设置登录页

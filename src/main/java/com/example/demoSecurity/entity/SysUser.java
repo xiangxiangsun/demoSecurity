@@ -1,130 +1,82 @@
 package com.example.demoSecurity.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.security.Timestamp;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
+
 
 /**
  * @author: sunxiangxiang
  * @data: 2020-03-06
  */
-public class SysUser implements UserDetails {
-    private Long id;
+@Setter
+@Getter
+public class SysUser implements Serializable,UserDetails {
+    private static final long serialVersionUID = 1L;
+//    private Integer id;
     private String username;
     private String password;
-    private String nickname;
+    private String role;
+
+    private boolean accountNonExpired;
+    private boolean accountNonLocked;
+    private boolean credentialsNonExpired;
     private boolean enabled;
-    private List<SysRole> roles;
-    private String email;
-    private String userface;
-    private Timestamp regTime;
 
-    @Override
-    @JsonIgnore
-    public boolean isAccountNonLocked() { // 帐户是否被冻结
-        return true;
-    }
-
-    // 帐户密码是否过期，一般有的密码要求性高的系统会使用到，比较每隔一段时间就要求用户重置密码
-    @Override
-    @JsonIgnore
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {  // 帐号是否可用
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
+    public SysUser(String username, String password, String role, boolean accountNonExpired, boolean accountNonLocked,
+                    boolean credentialsNonExpired, boolean enabled) {
+        // TODO Auto-generated constructor stub
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.accountNonExpired = accountNonExpired;
+        this.accountNonLocked = accountNonLocked;
+        this.credentialsNonExpired = credentialsNonExpired;
         this.enabled = enabled;
     }
 
-    @Override
-    @JsonIgnore
-    public List<GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        for (SysRole role : roles) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
-        }
-        return authorities;
+    public SysUser() {
+
     }
 
+    // 这是权限
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // TODO Auto-generated method stub
+        return AuthorityUtils.commaSeparatedStringToAuthorityList(role);
+    }
     @Override
     public String getPassword() {
+        // TODO Auto-generated method stub
         return password;
     }
-
     @Override
     public String getUsername() {
+        // TODO Auto-generated method stub
         return username;
     }
-
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        // TODO Auto-generated method stub
+        return accountNonExpired;
     }
-
-    public Long getId() {
-        return id;
+    @Override
+    public boolean isAccountNonLocked() {
+        // TODO Auto-generated method stub
+        return accountNonLocked;
     }
-
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        // TODO Auto-generated method stub
+        return credentialsNonExpired;
     }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public List<SysRole> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<SysRole> roles) {
-        this.roles = roles;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getUserface() {
-        return userface;
-    }
-
-    public void setUserface(String userface) {
-        this.userface = userface;
-    }
-
-    public Timestamp getRegTime() {
-        return regTime;
-    }
-
-    public void setRegTime(Timestamp regTime) {
-        this.regTime = regTime;
+    @Override
+    public boolean isEnabled() {
+        // TODO Auto-generated method stub
+        return enabled;
     }
 }
