@@ -76,6 +76,12 @@ public class MyUserDetailsService implements UserDetailsService {
                 SysUser userInfo = new SysUser("admin","123456","ROLE_ADMIN",true,true,true,true);
                 return userInfo;
         }
+            if (username.equals("user")){
+                //假设返回信息如下
+                SysUser userInfo = new SysUser("user","123456","ROLE_USER",true,true,true,true);
+                return userInfo;
+        }
+
         return null;
     }
 }

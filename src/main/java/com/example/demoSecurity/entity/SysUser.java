@@ -22,9 +22,13 @@ public class SysUser implements Serializable,UserDetails {
     private String password;
     private String role;
 
+    //账户是否过期
     private boolean accountNonExpired;
+    //账户是否锁定
     private boolean accountNonLocked;
+    //凭证是否过期
     private boolean credentialsNonExpired;
+    //账户是否启用
     private boolean enabled;
 
     public SysUser(String username, String password, String role, boolean accountNonExpired, boolean accountNonLocked,
