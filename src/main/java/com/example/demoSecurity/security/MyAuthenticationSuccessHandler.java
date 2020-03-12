@@ -41,10 +41,10 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(objectMapper.writeValueAsString(map));
 
-        logger.info("登陆成功啦");
+//        logger.info("登陆成功啦");
 
 
         //如果是要跳转到某个页面的，比如我们的那个whoim的则
-        new DefaultRedirectStrategy().sendRedirect(request, response, "/whoim");
+        new DefaultRedirectStrategy().sendRedirect(request, response, "/work");
     }
 }

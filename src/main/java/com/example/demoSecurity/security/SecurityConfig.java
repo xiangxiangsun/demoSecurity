@@ -25,6 +25,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MyAuthenticationFailHander myAuthenticationFailHander;
 
+    @Autowired
+    private MyAccessDeniedHandler myAccessDeniedHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -59,6 +62,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //登录失败提示页
                 .failureHandler(myAuthenticationFailHander)
                 .permitAll()
+
+                .and()
+                // 配置被拦截时的处理  这个位置很关键
+                .exceptionHandling()
+                //添加无权限时的处理
+                .accessDeniedHandler(myAccessDeniedHandler)
 
                 .and()
                 //退出放行

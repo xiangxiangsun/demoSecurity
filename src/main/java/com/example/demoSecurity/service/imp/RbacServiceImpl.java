@@ -65,7 +65,7 @@ public boolean hasPermission(HttpServletRequest request, Authentication authenti
             urls.add("/"+menuMapper.selectUrlById(menuId));
         }
         urls.add("/whoim");
-        System.out.println(urls);
+//        System.out.println(urls);
         //注意这里不能用equals判断，因为有些URL是有参数的，所以要用AntPathMatcher来比较
         for (String url : urls){
             if (antPathMatcher.match(url,request.getRequestURI())){

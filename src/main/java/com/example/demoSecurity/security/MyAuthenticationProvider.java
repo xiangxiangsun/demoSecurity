@@ -47,8 +47,8 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
         // //这里还可以加一些其他信息的判断，比如用户账号已停用等判断，这里为了方便我接下去的判断，我就不用加密了。
         //
         //
-        System.out.println("输入的密码："+password);
-        System.out.println("系统存的密码:"+userInfo.getPassword());
+//        System.out.println("输入的密码："+password);
+//        System.out.println("系统存的密码:"+userInfo.getPassword());
         if (!userInfo.getPassword().equals(password)) {
             throw new BadCredentialsException("密码不正确");
         }
