@@ -1,5 +1,6 @@
 package com.example.demoSecurity.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,4 +50,10 @@ public class LoginController {
     public String select(){
         return "select";
     }
+
+//    @RequestMapping("/403")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    public String sls(){
+//        return "403";
+//    }
 }

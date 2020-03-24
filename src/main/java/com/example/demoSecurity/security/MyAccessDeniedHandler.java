@@ -1,7 +1,6 @@
 package com.example.demoSecurity.security;
 
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 
